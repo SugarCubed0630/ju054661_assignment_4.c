@@ -1,18 +1,20 @@
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 int extraMemoryAllocated;
 
 // implement merge sort
 // extraMemoryAllocated counts bytes of extra memory allocated
-void mergeSort(int pData[], int l, int r)
+
+void merge(int pData[], int l, int m, int r)
 {
-	int i, j, k;
+    int i, j, k;
 	int num1 = m - l + 1;
 	int num2 = r - m;
 	
-	int L[n1], R[n2];
+	int L[num1], R[num2];
 	
 	for(i = 0; i < num1; i++)
 	{
@@ -58,13 +60,23 @@ void mergeSort(int pData[], int l, int r)
 	}
 }
 
+void mergeSort(int pData[], int l, int r)
+{
+	if(l < r)
+    {
+        int m = l + (r - l) / 2;
+        mergeSort(pData, l, m);
+        mergeSort(pData, m + 1, r);
+        merge(pData, l, m, r);
+    }
 }
+
 
 // implement insertion sort
 // extraMemoryAllocated counts bytes of memory allocated
 void insertionSort(int* pData, int n)
 {
-	int o, key, j;
+	int i, key, j;
 	
 	for(i = 1; i < n; i++)
 	{
@@ -77,6 +89,7 @@ void insertionSort(int* pData, int n)
 			j = j - 1;
 		}
 		pData[j + 1] = key;
+    }
 }
 
 // implement bubble sort
@@ -119,6 +132,7 @@ void selectionSort(int* pData, int n)
 		int temp = pData[min_idx];
 		pData[min_idx] = pData[i];
 		pData[i] = temp;
+    }
 }
 
 // parses input file to an integer array
