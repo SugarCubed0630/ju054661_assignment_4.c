@@ -14,7 +14,9 @@ void merge(int pData[], int l, int m, int r)
 	int num1 = m - l + 1;
 	int num2 = r - m;
 	
-	int L[num1], R[num2];
+	int* L = (int*)malloc(n1 * sizeof(int));
+	int* R = (int*)malloc(n2 * sizeof(int));
+	extraMemoryAllocated += n1 * sizeof(int) + n2 * sizeof(int);
 	
 	for(i = 0; i < num1; i++)
 	{
@@ -58,10 +60,13 @@ void merge(int pData[], int l, int m, int r)
 		j++;
 		k++;
 	}
+	free(L);
+	free(J);
 }
 
 void mergeSort(int pData[], int l, int r)
 {
+	extraMemoryAllocated = 0;
 	if(l < r)
     {
         int m = l + (r - l) / 2;
@@ -76,6 +81,7 @@ void mergeSort(int pData[], int l, int r)
 // extraMemoryAllocated counts bytes of memory allocated
 void insertionSort(int* pData, int n)
 {
+	extraMemoryAllocated = 0;
 	int i, key, j;
 	
 	for(i = 1; i < n; i++)
@@ -96,6 +102,7 @@ void insertionSort(int* pData, int n)
 // extraMemoryAllocated counts bytes of extra memory allocated
 void bubbleSort(int* pData, int n)
 {
+	extraMemoryAllocated = 0;
 	int i, j;
 	
 	for(i = 0; i < n - 1; i++)
@@ -116,6 +123,7 @@ void bubbleSort(int* pData, int n)
 // extraMemoryAllocated counts bytes of extra memory allocated
 void selectionSort(int* pData, int n)
 {
+	extraMemoryAllocated = 0;
 	int i, j, min_idx;
 	
 	for(i = 0; i < n - 1; i++)
